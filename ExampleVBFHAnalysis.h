@@ -475,6 +475,8 @@ public :
    void     Init(TTree *tree);
    void     processEvents();
    Int_t    JetAnalysis();
+   Int_t    MET();
+   Int_t    MHT();
    virtual Bool_t   Notify();
    virtual void     Show(Long64_t entry = -1);
 };
