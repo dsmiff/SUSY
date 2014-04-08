@@ -477,6 +477,7 @@ public :
    Int_t    JetAnalysis();
    Int_t    MET();
    Int_t    MHT();
+   void     end();
    virtual Bool_t   Notify();
    virtual void     Show(Long64_t entry = -1);
 };
