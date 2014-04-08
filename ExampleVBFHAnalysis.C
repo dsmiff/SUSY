@@ -12,6 +12,8 @@ void ExampleVBFHAnalysis::processEvents()
 
   Bool_t printout = 0;
 
+  TH1::SetDefaultSumw2();
+
    _nEvt = fChain->GetEntriesFast();
    Long64_t nbytes =0 , nb = 0;
 
@@ -25,7 +27,7 @@ void ExampleVBFHAnalysis::processEvents()
       // Declare the functions you want to run
 
       JetAnalysis();
-
+      MET();
    }
 }
 
@@ -35,6 +37,23 @@ Int_t ExampleVBFHAnalysis::JetAnalysis()
   // Jet analysis goes here
 
   cout << " HI " << endl;
+
+  return 0;
+}
+
+Int_t ExampleVBFHAnalysis::MET()
+{
+
+  // MET analysis goes here
+
+  return 0;
+
+}
+
+Int_t ExampleVBFHAnalysis::MHT()
+{
+
+  // MHT analysis goes here
 
   return 0;
 }
