@@ -28,6 +28,7 @@ void ExampleVBFHAnalysis::processEvents()
 
       JetAnalysis();
       MET();
+      end();
    }
 }
 
@@ -56,4 +57,15 @@ Int_t ExampleVBFHAnalysis::MHT()
   // MHT analysis goes here
 
   return 0;
+}
+
+void ExampleVBFHAnalysis::end()
+{
+
+  TFile *_rootFile = new TFile("VBF_invH_8000_output.root","RECREATE");
+
+  _rootFile->Write();
+  _rootFile->Close();
+
+
 }
