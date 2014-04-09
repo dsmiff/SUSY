@@ -14,8 +14,11 @@ void ExampleVBFHAnalysis::processEvents()
 
   TH1::SetDefaultSumw2();
 
-  _nEvt = fChain->GetEntriesFast();       // Get total number of entries
-   Long64_t nbytes =0 , nb = 0;
+  _fNJets = new TH1D("NJets", "NJets" , 100, 0, 20);
+
+  //  _nEvt = fChain->GetEntriesFast();       // Get total number of entries
+  _nEvt = 1000;
+  Long64_t nbytes =0 , nb = 0;
 
    for (Long64_t entry=0; entry<_nEvt;entry++) {            //  Loop over each entry
       Long64_t ientry = LoadTree(entry);
@@ -34,10 +37,19 @@ void ExampleVBFHAnalysis::processEvents()
 
 Int_t ExampleVBFHAnalysis::JetAnalysis()
 {
-  
-  // Jet analysis goes here
 
-  cout << " HI " << endl;
+  Int_t _nJets = sizeof(Jet_PT)/sizeof(Jet_PT[0]);
+
+  for(Int_t i=0; i < _nJets; i++){
+    //  Looping over jets per event. Apply cuts here
+    if(Jet_PT[i] < 0 ) continue;
+    _fNJets->Fill(Jet_size);
+    
+
+  }
+  
+
+  
 
   return 0;
 }
@@ -64,6 +76,7 @@ void ExampleVBFHAnalysis::end()
 
   TFile *_rootFile = new TFile("VBF_invH_8000_output.root","RECREATE");
 
+  _fNJets->Write();
   _rootFile->Write();
   _rootFile->Close();
 
