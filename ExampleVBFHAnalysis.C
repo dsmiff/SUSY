@@ -14,10 +14,10 @@ void ExampleVBFHAnalysis::processEvents()
 
   TH1::SetDefaultSumw2();
 
-   _nEvt = fChain->GetEntriesFast();
+  _nEvt = fChain->GetEntriesFast();       // Get total number of entries
    Long64_t nbytes =0 , nb = 0;
 
-   for (Long64_t entry=0; entry<_nEvt;entry++) {
+   for (Long64_t entry=0; entry<_nEvt;entry++) {            //  Loop over each entry
       Long64_t ientry = LoadTree(entry);
       if (ientry < 0) break;
       nb = fChain->GetEntry(entry);   nbytes += nb;
