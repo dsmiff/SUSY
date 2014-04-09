@@ -8,6 +8,7 @@
 #include <TClonesArray.h>
 #include <TObject.h>
 #include <TRefArray.h>
+#include <TH1.h>
 
 using namespace std;
 
@@ -31,9 +32,11 @@ const Int_t kMaxVertex = 27;
 
 class ExampleVBFHAnalysis {
 public :
+
    TTree          *fChain;
    Int_t           fCurrent;
    Int_t           _nEvt;
+   //   TH1D*           _fNJets;
 
    // Declaration of leaf types
    Int_t           Event_;
@@ -480,6 +483,11 @@ public :
    void     end();
    virtual Bool_t   Notify();
    virtual void     Show(Long64_t entry = -1);
+
+ private:
+   
+   TH1D* _fNJets;
+
 };
 
 #endif
