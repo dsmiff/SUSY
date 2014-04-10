@@ -365,7 +365,7 @@ module FastJetFinder Rho {
   add RhoEtaRange 0.0 2.5
   add RhoEtaRange 2.5 5.0
 
-  set JetPTMin 0.0
+  set JetPTMin 20.0
 }
 
 #####################
@@ -379,9 +379,9 @@ module FastJetFinder GenJetFinder {
 
   # algorithm: 1 CDFJetClu, 2 MidPoint, 3 SIScone, 4 kt, 5 Cambridge/Aachen, 6 antikt
   set JetAlgorithm 6
-  set ParameterR 0.5
+  set ParameterR 0.4
 
-  set JetPTMin 20.0
+  set JetPTMin 0.0
 }
 
 ############
@@ -399,9 +399,9 @@ module FastJetFinder FastJetFinder {
 
   # jet algorithm: 1 CDFJetClu, 2 MidPoint, 3 SIScone, 4 kt, 5 Cambridge/Aachen, 6 antikt
   set JetAlgorithm 6
-  set ParameterR 0.5
+  set ParameterR 0.4
 
-  set JetPTMin 20.0
+  set JetPTMin 0.0
 }
 
 ###########################
