@@ -9,6 +9,8 @@
 #include <TObject.h>
 #include <TRefArray.h>
 #include <TH1.h>
+#include <vector>
+#include <iterator>
 
 using namespace std;
 
@@ -487,9 +489,11 @@ public :
  private:
    
    TH1D* _fNJets;
+   TH1D* _f1stJet;
+   TH1D* _f2ndJet;
    
    std::vector<Int_t> njets;
-
+   std::vector<Float_t> jetpts;
 };
 
 #endif
