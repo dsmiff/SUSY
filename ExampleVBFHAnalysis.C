@@ -1,8 +1,11 @@
 #define ExampleVBFHAnalysis_cxx
 #include "ExampleVBFHAnalysis.h"
 #include <TH2.h>
+#include <TH1.h>
 #include <TStyle.h>
 #include <TCanvas.h>
+#include <vector>
+#include <iterator>
 #include <iostream>
 
 using namespace std;
@@ -23,7 +26,8 @@ void ExampleVBFHAnalysis::processEvents()
    for (Long64_t entry=0; entry<_nEvt;entry++) {            //  Loop over each entry
       Long64_t ientry = LoadTree(entry);
       if (ientry < 0) break;
-      nb = fChain->GetEntry(entry);   nbytes += nb;
+      nb = fChain->GetEntry(entry);   nbytes += nb;        // Note fChain is a pointer to the Delphes tree
+
 
       if ( printout ) continue;
 
@@ -40,16 +44,20 @@ Int_t ExampleVBFHAnalysis::JetAnalysis()
 
   Int_t _nJets = sizeof(Jet_PT)/sizeof(Jet_PT[0]);
 
+  
+
   for(Int_t i=0; i < _nJets; i++){
     //  Looping over jets per event. Apply cuts here
+
+    njets.push_back(Jet_size);
+  
     if(Jet_PT[i] < 0 ) continue;
-    _fNJets->Fill(Jet_size);
-    
-
+    _fNJets->Fill(njets.at(i));
+      
   }
-  
+      //  std::cout << "Number of jets entry 2: " << njets.at(1) << std::endl;
 
-  
+  njets.clear();
 
   return 0;
 }
