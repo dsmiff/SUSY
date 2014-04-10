@@ -487,6 +487,8 @@ public :
  private:
    
    TH1D* _fNJets;
+   
+   std::vector<Int_t> njets;
 
 };
 
