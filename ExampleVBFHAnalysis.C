@@ -20,9 +20,10 @@ void ExampleVBFHAnalysis::processEvents()
 
 
   _fNJets = new TH1D("NJets", "NJets" , 100, 0, 20);
-  _f1stJet = new TH1D("1stJet","1stJetPT", 100, 0, 300);
-  _f2ndJet = new TH1D("2ndJet","2ndJetPT",100, 0, 300);
-
+  _f1stJetPT = new TH1D("1stJetPT","1stJetPT", 100, 0, 300);
+  _f2ndJetPT = new TH1D("2ndJetPT","2ndJetPT",100, 0, 300);
+  _f1stJetMass = new TH1D("1stJetMass","1stJetMass", 100, 0, 300);
+  _f2ndJetMass = new TH1D("2ndJetMass","2ndJetMass", 100, 0, 300);
 
 
 
@@ -49,26 +50,29 @@ Int_t ExampleVBFHAnalysis::JetAnalysis()
 {
 
   Int_t _nJets = sizeof(Jet_PT)/sizeof(Jet_PT[0]);
+  Int_t JetPT_cut = 0;
+  
 
   for(Int_t i=0; i < _nJets; i++){
     //  Looping over jets per event. Apply cuts here
   
     njets.push_back(Jet_size);                   // Transfering array information to vectors
-      if(Jet_PT[i] < 0 ) continue;
+      if(Jet_PT[i] < JetPT_cut ) continue;
     _fNJets->Fill(njets.at(i));
 
     jetpts.push_back(Jet_PT[i]);
-    _f1stJet->Fill(jetpts.at(0));
-  
-    if(jetpts.at(1) < 0) continue;
-    _f2ndJet->Fill(jetpts.at(1));      // This needs to be redone (produces out-of-range error)
-    
+    jetmass.push_back(Jet_Mass[i]);
+    _f1stJetPT->Fill(jetpts.at(0));
+    _f1stJetMass->Fill(jetmass.at(0));
+
+    if(jetpts.size() > 1) {
+    _f2ndJetPT->Fill(jetpts.at(1));  
+    _f2ndJetMass->Fill(jetmass.at(1));
+    }
  }
 
   njets.clear();
   jetpts.clear();
-
-
 
   return 0;
 }
@@ -95,8 +99,10 @@ void ExampleVBFHAnalysis::end()
 
   TFile *_rootFile = new TFile("VBF_invH_8000_output.root","RECREATE");
 
-  _f1stJet->Write();
-  _f2ndJet->Write();
+  _f1stJetPT->Write();
+  _f2ndJetPT->Write();
+  _f1stJetMass->Write();
+  _f2ndJetMass->Write();
   _fNJets->Write();
   _rootFile->Write();
   _rootFile->Close();
