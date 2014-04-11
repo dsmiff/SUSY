@@ -489,11 +489,14 @@ public :
  private:
    
    TH1D* _fNJets;
-   TH1D* _f1stJet;
-   TH1D* _f2ndJet;
-   
+   TH1D* _f1stJetPT;
+   TH1D* _f2ndJetPT;
+   TH1D* _f1stJetMass;
+   TH1D* _f2ndJetMass;
+
    std::vector<Int_t> njets;
    std::vector<Float_t> jetpts;
+   std::vector<Float_t> jetmass;
 };
 
 #endif
