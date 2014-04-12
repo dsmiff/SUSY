@@ -482,7 +482,7 @@ public :
    Int_t    JetAnalysis();
    Int_t    MET();
    Int_t    MHT();
-   void     end();
+   void     Output();
    virtual Bool_t   Notify();
    virtual void     Show(Long64_t entry = -1);
 
@@ -491,11 +491,16 @@ public :
    TH1D* _fNJets;
    TH1D* _f1stJetPT;
    TH1D* _f2ndJetPT;
+   TH1D* _fJetEta;
+   TH1D *_fHT;
+   TH1D *_fJetPhi;
    TH1D* _f1stJetMass;
    TH1D* _f2ndJetMass;
 
    std::vector<Int_t> njets;
    std::vector<Float_t> jetpts;
+   std::vector<Float_t> jeteta;
+   std::vector<Float_t> jetphi;
    std::vector<Float_t> jetmass;
 };
 
