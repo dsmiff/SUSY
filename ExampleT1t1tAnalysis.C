@@ -55,8 +55,8 @@ void ExampleT1t1tAnalysis::processEvents()
   
 
 
-  //  Int_t _nEvt = fChain->GetEntriesFast();
-  Int_t  _nEvt = 1000;
+  Int_t _nEvt = fChain->GetEntriesFast();
+  //  Int_t  _nEvt = 1000;
   Long64_t nbytes =0 , nb = 0;
 
    for (Long64_t entry=0; entry<_nEvt;entry++) {            //  Looping over each entry
@@ -64,7 +64,7 @@ void ExampleT1t1tAnalysis::processEvents()
       if (ientry < 0) break;
       nb = fChain->GetEntry(entry);   nbytes += nb;
 
-       std::cout << "******* NEW ENTRY["<< entry <<"]" << std::endl;
+         std::cout << "******* NEW ENTRY["<< entry <<"]" << std::endl;
 
        if ( printout ) continue;
 
@@ -116,6 +116,8 @@ void ExampleT1t1tAnalysis::processEvents()
    jeteta.clear();
    jetmass.clear();
 
+   cout << "ALL GOOD AT JET ANALYSIS" << endl;
+
 
    return 0;
  }
@@ -126,14 +128,15 @@ void ExampleT1t1tAnalysis::processEvents()
 	 Int_t ntops=0, nstops=0, nglu=0, nlsps=0, nws=0;
 
 	 for(Int_t i=0; i<_nParticles; i++){
+	   cout << "HI " << endl;
 		 particles.push_back(Particle_PID[i]);
 		 mothers.push_back(Particle_M1[i]);
 		 particlepts.push_back(Particle_PT[i]);
 
 		 if(abs(particles.at(i)) == 6){
-		 _fTopPT->Fill(particlepts.at(i));
 		 Top.SetPxPyPzE(Particle_Px[i],Particle_Py[i],Particle_Pz[i],Particle_E[i]);
-		 tops.push_back(Top);                                                          // Storing the top quark TLorentzVectors into another vector
+		 tops.push_back(Top);
+		 _fTopPT->Fill(particlepts.at(i));
 		 ntops++;
 		 }	
 		 else if(abs(particles.at(i)) == 1000006){
@@ -154,10 +157,14 @@ void ExampleT1t1tAnalysis::processEvents()
 		   nws++;
 		 }
       	 }
+	 cout << "_nParticles: " << _nParticles << endl;
 	
+
 	 // Analyse the effect of top quark boost on decay products 
-	 
-	 for(Int_t n=0; n< _nParticles; n++){
+	 // This is where the bug lies!
+
+
+	 for(Int_t n=0; n < _nParticles; n++){
 	   if(abs(particles.at(n)) == 5){
      	     Bottom.SetPxPyPzE(Particle_Px[n],Particle_Py[n],Particle_Pz[n],Particle_E[n]);                 // Creating a TLorentzVector of bottom quarks 
 	     bottoms.push_back(Bottom);                                                                     // Here we store the TLorentzVectors into a vector
@@ -175,13 +182,30 @@ void ExampleT1t1tAnalysis::processEvents()
 	 }
 	 
 	 // Note that the top quarks are stored above in order of discovery. In other words, the first top quark in the vector is that which was first seen in analysis code. 
+	 if(tops.size() != 4){ cout << "Top vector error" << endl;}
+	 if(bottoms.size() != 4){ cout << "Bottom vector error: " << bottoms.size() << endl;}
+	 if(wbosons.size() != 4){ cout << "wboson vector error" << endl;}
+	 if(Btopindex.size() != 4){ cout << "Btopindex vector error" << endl;}
+	 if(Wtopindex.size() != 4){ cout << "Wtopindex vector error" << endl;}
+	
 
+	 /*
+	 cout << "Size of tops: " << tops.size() << endl;
+	 cout << "Size of bottoms: " << bottoms.size() << endl;
+	 cout << "Size of wbosons: " << wbosons.size() << endl;
+	 cout << "Size of BTopindex: " << Btopindex.size() << endl;
+	 cout << "Size of Wtopindex: " << Wtopindex.size() << endl;
+	 */
+	 
 	 Int_t bsize = Btopindex.size();
 	 Float_t DeltaR1, DeltaR2, DeltaR3, DeltaR4;
+
 	 for(Int_t nn = 0; nn < bsize; nn++){                                 // Now looping through each entry of the top quark indices to check for matches
-	   if(Btopindex.at(nn) == Wtopindex.at(0)){
+	   try
+	     {
+       	   if(Btopindex.at(nn) == Wtopindex.at(0)){
 	     DeltaR1 = sqrt(pow((bottoms.at(nn).Eta() - wbosons.at(0).Eta()),2) + pow((bottoms.at(nn).Phi() - wbosons.at(0).Phi()),2));
-	     if(DeltaR1 > 3.14){
+  	     if(DeltaR1 > 3.14){
 	       DeltaR1 = 2*3.14 - DeltaR1;
 	     }
 	     _fDeltaR1->Fill(tops.at(0).Pt(),DeltaR1);
@@ -207,9 +231,16 @@ void ExampleT1t1tAnalysis::processEvents()
 	     }
 	     _fDeltaR4->Fill(tops.at(3).Pt(),DeltaR4);
 	   }
-	   
+	   if(bsize != 4 || tops.size() != 4)
+	     throw "ERROR";
+	       }
+	   catch(char const* ERROR)
+	     {
+	       cout << ERROR << endl;
+	     }
+	   cout << "ALL GOOD HERE" << endl;
 	 }
-
+	 
 
 	// Sanity check on final state per event
 	 try
