@@ -1,3 +1,13 @@
+// Author: Dominic Smith
+// Date: March 2014
+// Univeristy of Bristol/Vrije Universiteit Brussel
+//
+// Description:
+// Analysis code for the T1t1t SUSY model.
+// The code utilises the TSelector function of ROOT & has the required header file
+// The histo analysis can be found as T1t1t_analysis in another subdirectory
+
+
 #define ExampleT1t1tAnalysis_cxx
 #include "ExampleT1t1tAnalysis.h"
 #include <TH2.h>
