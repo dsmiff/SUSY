@@ -18,23 +18,24 @@ void T1t1t_analysis()
   int n1 = tokens1->GetEntries();
   
 
-  
-
   // For TH1D histograms
   TString plots = "JetPT,1stJetPT,2ndJetPT,JetEta,1stJetMass,2ndJetMass,HT,NJets,TopPT,StopPT,LSPPT";
   TObjArray* tokens = plots.Tokenize(",");
   int n = tokens->GetEntries();
+
+  // Canvas initialising 
   TCanvas c1("c1","draw plots",0,0,1000, 800);
   TCanvas ci_1("ci_1","draw shit",0,0,1000, 800);
   TCanvas c2("c2","draw together", 0, 0, 1000, 800);
   c1.Divide( 4, TMath::Nint(n/3.));
- 
+
+  // Histo style initialising 
   TString styles = "hist,E,l,";
   TObjArray* styletokens = styles.Tokenize(",");
   int m = styletokens->GetEntries();
   TString style = ((TObjString*) styletokens->At(0))->String();
 
-  
+  // Plot histos
 
   for(int i=0; i<n; i++)
     {
