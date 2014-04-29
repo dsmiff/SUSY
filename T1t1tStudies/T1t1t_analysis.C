@@ -30,15 +30,50 @@ void T1t1t_analysis()
   c1.Divide( 4, TMath::Nint(n/3.));
 
   // Histo style initialising 
-  TString styles = "hist,E,l,";
+  TString styles = "hist,E,l,CONTZ";
   TObjArray* styletokens = styles.Tokenize(",");
   int m = styletokens->GetEntries();
-  TString style = ((TObjString*) styletokens->At(0))->String();
+  //  TString style = ((TObjString*) styletokens->At(0))->String();
 
-  // Plot histos
+  // Plot TH2D histos
+
+  for(int i=0; i<n1; i++)
+    {
+      TString style = ((TObjString*) styletokens->At(3))->String();
+      TString plot1 = ((TObjString*) tokens1->At(i))->String();
+
+      std::cout << "Plot " << plot1 << std::endl;
+      TH2F *h2i = (TH2F*)rootfile->Get(plot1);
+
+      ci_1.cd();
+      h2i->Draw(style);
+      h2i->GetXaxis()->SetTitle((const Char_t*) (plot1));
+      h2i->GetYaxis()->SetTitle("Events");
+      ci_1.SaveAs((const Char_t*) (plot1 + ".pdf"));
+
+      c1.cd(i+1);
+      h2i->Draw(style);
+      
+      c2.cd();
+      h2i->Draw(style);
+      c2.Print("histos.pdf(");
+
+
+    }
+  
+
+  c1.cd();
+  c1.SaveAs("histDraws.ps");
+
+
+
+
+  // Plot TH1D histos
 
   for(int i=0; i<n; i++)
     {
+
+  TString style = ((TObjString*) styletokens->At(0))->String();
   TString plot = ((TObjString*) tokens->At(i))->String();
 
   std::cout << "Plot " << plot << std::endl;
