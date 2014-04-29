@@ -11,9 +11,16 @@ void T1t1t_analysis()
   TFile *rootfile = new TFile(rootname);
   std::cout << "Rootfile : " << rootname << std::endl;
 
+  // For TH2D histograms
+  
+  TString plots2 = "DeltaR1,DeltaR2,DeltaR3,DeltaR4";
+  TObjArray* tokens1 = plots2.Tokenize(",");
+  int n1 = tokens1->GetEntries();
   
 
+  
 
+  // For TH1D histograms
   TString plots = "JetPT,1stJetPT,2ndJetPT,JetEta,1stJetMass,2ndJetMass,HT,NJets,TopPT,StopPT,LSPPT";
   TObjArray* tokens = plots.Tokenize(",");
   int n = tokens->GetEntries();
@@ -38,6 +45,7 @@ void T1t1t_analysis()
 
   ci_1.cd();
   hi->Draw(style);
+  hi->Scale(1/hi->GetEntries());
   hi->GetXaxis()->SetTitle((const Char_t*) (plot));
   hi->GetYaxis()->SetTitle("Events");
   ci_1.SaveAs((const Char_t*) (plot + ".pdf"));
@@ -48,11 +56,11 @@ void T1t1t_analysis()
 
   c2.cd();
   hi->Draw(style);
-  c2.Print("c2.ps(");
+  c2.Print("histos.pdf(");
 
     }	   
 
-  
+  c2.Print("histos.pdf)");
   c1.cd();
   c1.SaveAs("histDraws.ps");
 
