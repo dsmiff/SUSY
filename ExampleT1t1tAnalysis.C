@@ -64,7 +64,7 @@ void ExampleT1t1tAnalysis::processEvents()
       if (ientry < 0) break;
       nb = fChain->GetEntry(entry);   nbytes += nb;
 
-         std::cout << "******* NEW ENTRY["<< entry <<"]" << std::endl;
+        std::cout << "******* NEW ENTRY["<< entry <<"]" << std::endl;
 
        if ( printout ) continue;
 
@@ -219,7 +219,7 @@ void ExampleT1t1tAnalysis::processEvents()
 	       }
 	   catch(char const* ERROR)
 	     {
-	       cout << ERROR << endl;
+	       cerr << ERROR << endl;
 	     }
 
 	 }
@@ -232,7 +232,7 @@ void ExampleT1t1tAnalysis::processEvents()
 	  }
 	catch(char const* err_code)
 	  {
-	    std::cout << "ERROR CODE : " << err_code << std::endl;
+	    cerr << "ERROR CODE : " << err_code << endl;
 	  }
 	try
 	  {
@@ -241,7 +241,7 @@ void ExampleT1t1tAnalysis::processEvents()
 		}
 	catch(char const* err_code1)
 	  {
-	    std::cout << "ERROR CODE : " << err_code1 << std::endl;
+	    cerr << "ERROR CODE : " << err_code1 << endl;
 	  }
 	
 	particles.clear();
