@@ -125,52 +125,52 @@ void ExampleT1t1tAnalysis::processEvents()
 	 Int_t _nParticles = sizeof(Particle_PID)/sizeof(Particle_PID[0]);
 	 Int_t ntops=0, nstops=0, nglu=0, nlsps=0, nws=0;
 
-	 for(Int_t i=0; i<_nParticles; i++){
-		 particles.push_back(Particle_PID[i]);
-		 particlestatus.push_back(Particle_Status[i]);
-		 mothers.push_back(Particle_M1[i]);
-		 particlepts.push_back(Particle_PT[i]);
+	for(Int_t i=0; i<_nParticles; i++){
+		particles.push_back(Particle_PID[i]);
+		particlestatus.push_back(Particle_Status[i]);
+		mothers.push_back(Particle_M1[i]);
+		particlepts.push_back(Particle_PT[i]);
 
-		 if(abs(particles.at(i)) == 6){
-		 Top.SetPxPyPzE(Particle_Px[i],Particle_Py[i],Particle_Pz[i],Particle_E[i]);
-		 tops.push_back(Top);
-		 _fTopPT->Fill(particlepts.at(i));
-		 ntops++;
+		if(abs(particles.at(i)) == 6){
+		Top.SetPxPyPzE(Particle_Px[i],Particle_Py[i],Particle_Pz[i],Particle_E[i]);
+		tops.push_back(Top);
+		_fTopPT->Fill(particlepts.at(i));
+		ntops++;
 		 }	
-		 else if(abs(particles.at(i)) == 1000006){
-		   _fStopPT->Fill(particlepts.at(i));
-		   Stop.SetPxPyPzE(Particle_Px[i],Particle_Py[i],Particle_Pz[i],Particle_E[i]);
-		   nstops++;
+		else if(abs(particles.at(i)) == 1000006){
+		  _fStopPT->Fill(particlepts.at(i));
+		  Stop.SetPxPyPzE(Particle_Px[i],Particle_Py[i],Particle_Pz[i],Particle_E[i]);
+		  nstops++;
 		 }
-		 else if(abs(particles.at(i)) == 1000022){
-		   _fLSPPT->Fill(particlepts.at(i));
-		   Lsp.SetPxPyPzE(Particle_Px[i],Particle_Py[i],Particle_Pz[i],Particle_E[i]);
-		   nlsps++;
+		else if(abs(particles.at(i)) == 1000022){
+		  _fLSPPT->Fill(particlepts.at(i));
+		  Lsp.SetPxPyPzE(Particle_Px[i],Particle_Py[i],Particle_Pz[i],Particle_E[i]);
+		  nlsps++;
 		 }
-		 else if(abs(particles.at(i)) == 1000021){
-		   Gluino.SetPxPyPzE(Particle_Px[i],Particle_Py[i],Particle_Pz[i],Particle_E[i]);
-		   nglu++;
+		else if(abs(particles.at(i)) == 1000021){
+		  Gluino.SetPxPyPzE(Particle_Px[i],Particle_Py[i],Particle_Pz[i],Particle_E[i]);
+		  nglu++;
 		 }
-		 else if(abs(particles.at(i)) == 24){
-		 	nws++;
+		else if(abs(particles.at(i)) == 24){
+		 nws++;
 		 }
 		}
 
 
 
-		for(Int_t n=0; n < _nParticles; n++){
-			if(particlestatus.at(n) == -1) continue;			// Avoiding any initial state partons that could be bottom quarks
- 			if(abs(particles.at(n)) == 24){
-		  	WBoson.SetPxPyPzE(Particle_Px[n],Particle_Py[n],Particle_Pz[n],Particle_E[n]);
-	     	wbosons.push_back(WBoson);
-	     if(abs(particles.at(mothers.at(n))) == 6){
-	       	Wtopindex.push_back(mothers.at(n));
+	for(Int_t n=0; n < _nParticles; n++){
+		if(particlestatus.at(n) == -1) continue;			// Avoiding any initial state partons that could be bottom quarks
+ 		if(abs(particles.at(n)) == 24){
+		  WBoson.SetPxPyPzE(Particle_Px[n],Particle_Py[n],Particle_Pz[n],Particle_E[n]);
+	      wbosons.push_back(WBoson);
+	    if(abs(particles.at(mothers.at(n))) == 6){
+	       Wtopindex.push_back(mothers.at(n));
 	     	}
 		 }
-		 else if(abs(particles.at(n)) == 5){									// Note that we want the bottoms to be final state
-     	   	Bottom.SetPxPyPzE(Particle_Px[n],Particle_Py[n],Particle_Pz[n],Particle_E[n]);                 // Creating a TLorentzVector of bottom quarks 
+		else if(abs(particles.at(n)) == 5){									// Note that we want the bottoms to be final state
+     	 	Bottom.SetPxPyPzE(Particle_Px[n],Particle_Py[n],Particle_Pz[n],Particle_E[n]);                 // Creating a TLorentzVector of bottom quarks 
 	     	bottoms.push_back(Bottom);                                                                     // Here we store the TLorentzVectors into a vector
-		     if(abs(particles.at(mothers.at(n))) == 6){                                                     // Check if parent particle is a top quark 
+		  	if(abs(particles.at(mothers.at(n))) == 6){                                                     // Check if parent particle is a top quark 
 	       	Btopindex.push_back(mothers.at(n));                                                          // Storing the indices of the top quarks into a vector. Same method applied to Ws
 		     }
       	 }
@@ -181,7 +181,6 @@ void ExampleT1t1tAnalysis::processEvents()
 
 	 
 	 Int_t bsize = Btopindex.size();
-	 cout << "bsize: " << bsize << endl;
 	 Float_t DeltaR1, DeltaR2, DeltaR3, DeltaR4;
 
 	 for(Int_t nn = 0; nn < bsize; nn++){                                 // Now looping through each entry of the top quark indices to check for matches
