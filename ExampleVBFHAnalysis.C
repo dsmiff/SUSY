@@ -23,15 +23,15 @@ void ExampleVBFHAnalysis::processEvents()
   _f1stJetPT = new TH1D("1stJetPT","1stJetPT", 100, 0, 300);
   _f2ndJetPT = new TH1D("2ndJetPT","2ndJetPT",100, 0, 300);
   _fJetEta = new TH1D("JetEta","JetEta", 100, -5, 5);
-  _fJetPhi = new TH1D("JetPhi","JetPhi", 100, 0, 300);
-  _fHT = new TH1D("HT","HT",100, 0, 1500);
-  _f1stJetMass = new TH1D("1stJetMass","1stJetMass", 100, 0, 300);
-  _f2ndJetMass = new TH1D("2ndJetMass","2ndJetMass", 100, 0, 300);
+  _fJetPhi = new TH1D("JetPhi","JetPhi", 100, 0, 50);
+  _fHT = new TH1D("HT","HT",100, 0, 800);
+  _f1stJetMass = new TH1D("1stJetMass","1stJetMass", 100, 0, 50);
+  _f2ndJetMass = new TH1D("2ndJetMass","2ndJetMass", 100, 0, 50);
 
 
 
-  //  _nEvt = fChain->GetEntriesFast();       // Get total number of entries
-  _nEvt = 1000;     
+    _nEvt = fChain->GetEntriesFast();       // Get total number of entries
+  //  _nEvt = 1000;     
   Long64_t nbytes =0 , nb = 0;
 
    for (Long64_t entry=0; entry<_nEvt;entry++) {            //  Loop over each entry
