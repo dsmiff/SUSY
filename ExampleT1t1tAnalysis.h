@@ -490,10 +490,11 @@ private:
    std::vector<Float_t> jeteta;
    std::vector<Float_t> jetphi;
    std::vector<Long64_t> particles;        // Vector of particle PIDs per event
-   std::vector<Long64_t> mothers;
+   std::vector<Int_t> particlestatus;
+   std::vector<Float_t> mothers;
    std::vector<Float_t> particlepts;       // Vector of the particles PIDs PT
-   std::vector<Int_t> Btopindex;
-   std::vector<Int_t> Wtopindex;
+   std::vector<Float_t> Btopindex;
+   std::vector<Float_t> Wtopindex;
    std::vector<TLorentzVector> tops;
    std::vector<TLorentzVector> bottoms;
    std::vector<TLorentzVector> wbosons;
