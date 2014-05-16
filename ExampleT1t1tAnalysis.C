@@ -22,6 +22,8 @@
 #include <iterator>
 #include <iostream>
 
+// #include "Event.h"
+
 using namespace std;
 
 class ExRootTreeReader;
@@ -37,8 +39,11 @@ void ExampleT1t1tAnalysis::processEvents()
   // Book histograms
 
   _fJetPT = new TH1D("JetPT","JetPT",100, 0.0, 1500);
+  _fGenJetPT = new TH1D("GenJetPT","GenJetPT",100, 0.0, 1500);
+  _fDeltaJetPTs = new TH1D("DeltaJetPTS","DeltaJetPTs",100, -5, 5);
   _fNJets = new TH1D("NJets", "NJets" , 100, 0, 20);
-  _fHT = new TH1D("HT","HT", 100, 0, 3000);
+   _fHT = new TH1D("HT","HT", 100, 0, 3000);
+  _fScalarHT = new TH1D("ScalarHT","ScalarHT",100, 0, 3000);
   _f1stJetPT = new TH1D("1stJetPT","1stJetPT", 100, 0, 1500);
   _f2ndJetPT = new TH1D("2ndJetPT","2ndJetPT",100, 0, 1500);
   _fJetEta = new TH1D("JetEta", "JetEta", 100, -5, 5);
@@ -46,7 +51,10 @@ void ExampleT1t1tAnalysis::processEvents()
   _f1stJetMass = new TH1D("1stJetMass","1stJetMass", 100, 0, 300);
   _f2ndJetMass = new TH1D("2ndJetMass","2ndJetMass", 100, 0, 300);
   _fTopPT = new TH1D("TopPT", "TopPT", 100, 0, 1000);
+  _fTopStopPT = new TH1D("TopStopPT","TopStopPT",100, 0, 1000);
+  _fTopGluinoPT = new TH1D("TopGluinoPT","TopGluinoPT",100, 0, 1000);
   _fStopPT = new TH1D("StopPT","StopPT",100, 0, 1000);
+  _fGluinoPT = new TH1D("GluinoPT","GluinoPT",100, 0, 1000);
   _fLSPPT = new TH1D("LSPPT","LSPPT",100, 0, 600);
   _fDeltaR1 = new TH2F("DeltaR1","DeltaR1",200,0., 1200, 50,0.,6);
   _fDeltaR2 = new TH2F("DeltaR2","DeltaR2",200,0., 1200, 50,0.,6);
@@ -55,8 +63,8 @@ void ExampleT1t1tAnalysis::processEvents()
   
 
 
-  Int_t _nEvt = fChain->GetEntriesFast();
-  //  Int_t  _nEvt = 1000;
+  //Int_t _nEvt = fChain->GetEntriesFast();
+  Int_t  _nEvt = 1000;
   Long64_t nbytes =0 , nb = 0;
 
    for (Long64_t entry=0; entry<_nEvt;entry++) {            //  Looping over each entry
@@ -64,7 +72,7 @@ void ExampleT1t1tAnalysis::processEvents()
       if (ientry < 0) break;
       nb = fChain->GetEntry(entry);   nbytes += nb;
 
-        std::cout << "******* NEW ENTRY["<< entry <<"]" << std::endl;
+         std::cout << "******* NEW ENTRY["<< entry <<"]" << std::endl;
 
        if ( printout ) continue;
 
@@ -74,13 +82,13 @@ void ExampleT1t1tAnalysis::processEvents()
      this->Output();
 
     }
- }
+}
 
  Int_t ExampleT1t1tAnalysis::JetAnalysis()
  {
 
    Int_t _nJets = sizeof(Jet_PT)/sizeof(Jet_PT[0]);
-   Int_t JetPT_cut = 0;
+   Int_t JetPT_cut = 0; // All good up to here
    Long64_t HT = 0;
 
    for(Int_t i=0; i < _nJets; i++){
@@ -94,6 +102,7 @@ void ExampleT1t1tAnalysis::processEvents()
      jetmass.push_back(Jet_Mass[i]);
      jeteta.push_back(Jet_Eta[i]);
      jetphi.push_back(Jet_Phi[i]);
+     cout << "jetpts.at(1): " << jetpts.at(0) << endl;
      _fJetPT->Fill(jetpts.at(i));
      _f1stJetPT->Fill(jetpts.at(0));
      _f1stJetMass->Fill(jetmass.at(0));
@@ -102,22 +111,46 @@ void ExampleT1t1tAnalysis::processEvents()
 
      HT += jetpts.at(i);                        // HT as defined manually (can call Delphes equivalent)
      _fHT->Fill(HT);
+     
+     // All good here
 
      if(jetpts.size() > 1) {
      _f2ndJetPT->Fill(jetpts.at(1));  
      _f2ndJetMass->Fill(jetmass.at(1));
      }
+   }    
+   
+   //   cout << "Scalar ht: " << ScalarHT_HT[0] << endl;
+   _fScalarHT->Fill(ScalarHT_HT[0]);
 
+   Int_t _nGenJets = sizeof(GenJet_PT)/sizeof(GenJet_PT[0]);
+   Int_t GenJetPT_cut = 0;
 
-       }    
+   for(Int_t j=0; j < _nGenJets; j++){
+     
+     //     if(genjetpts.at(j) < GenJetPT_cut) continue;
+     ngenjets.push_back(GenJet_size);
+     genjetpts.push_back(GenJet_PT[j]);
+     _fGenJetPT->Fill(genjetpts.at(j));
+     _fDeltaJetPTs->Fill((genjetpts.at(j) - jetpts.at(j))/genjetpts.at(j));
+     
+     // All good here
+
+   }
+
 
    njets.clear();
+   ngenjets.clear();
    jetpts.clear();
+   genjetpts.clear();
    jeteta.clear();
+   jetphi.clear();
    jetmass.clear();
 
 
+
    return 0;
+
  }
 
  Int_t ExampleT1t1tAnalysis::ParticleAnalysis(){
@@ -136,8 +169,10 @@ void ExampleT1t1tAnalysis::processEvents()
 		tops.push_back(Top);
 		_fTopPT->Fill(particlepts.at(i));
 		ntops++;
-		 }	
-		else if(abs(particles.at(i)) == 1000006){
+		if(abs(particles.at(mothers.at(i))) == 1000006){ _fTopStopPT->Fill(particlepts.at(i)); }
+		if(abs(particles.at(mothers.at(i))) == 1000021){ _fTopGluinoPT->Fill(particlepts.at(i)); }
+		}	
+       		else if(abs(particles.at(i)) == 1000006){
 		  _fStopPT->Fill(particlepts.at(i));
 		  Stop.SetPxPyPzE(Particle_Px[i],Particle_Py[i],Particle_Pz[i],Particle_E[i]);
 		  nstops++;
@@ -148,13 +183,14 @@ void ExampleT1t1tAnalysis::processEvents()
 		  nlsps++;
 		 }
 		else if(abs(particles.at(i)) == 1000021){
+		  _fGluinoPT->Fill(particlepts.at(i));
 		  Gluino.SetPxPyPzE(Particle_Px[i],Particle_Py[i],Particle_Pz[i],Particle_E[i]);
 		  nglu++;
 		 }
 		else if(abs(particles.at(i)) == 24){
 		 nws++;
 		 }
-		}
+	}
 
 
 
@@ -165,23 +201,25 @@ void ExampleT1t1tAnalysis::processEvents()
 	      wbosons.push_back(WBoson);
 	    if(abs(particles.at(mothers.at(n))) == 6){
 	       Wtopindex.push_back(mothers.at(n));
-	     	}
-		 }
+	    }
+		}
 		else if(abs(particles.at(n)) == 5){									// Note that we want the bottoms to be final state
      	 	Bottom.SetPxPyPzE(Particle_Px[n],Particle_Py[n],Particle_Pz[n],Particle_E[n]);                 // Creating a TLorentzVector of bottom quarks 
 	     	bottoms.push_back(Bottom);                                                                     // Here we store the TLorentzVectors into a vector
 		  	if(abs(particles.at(mothers.at(n))) == 6){                                                     // Check if parent particle is a top quark 
 	       	Btopindex.push_back(mothers.at(n));                                                          // Storing the indices of the top quarks into a vector. Same method applied to Ws
-		     }
-      	 }
-	 }
+			}
+		}
+	}
 	 
 	 // Note that the top quarks are stored above in order of discovery. 
 	 // In other words, the first top quark in the vector is that which was first seen in analysis code. 
 
-	 
+
 	 Int_t bsize = Btopindex.size();
+
 	 Float_t DeltaR1, DeltaR2, DeltaR3, DeltaR4;
+
 
 	 for(Int_t nn = 0; nn < bsize; nn++){                                 // Now looping through each entry of the top quark indices to check for matches
 	   try
@@ -262,9 +300,11 @@ void ExampleT1t1tAnalysis::processEvents()
 Int_t ExampleT1t1tAnalysis::Output()
 {
 
-  TFile *_rootFile = new TFile("T1t1t_output.root","RECREATE");
+  TFile *_rootFile = new TFile("T1t1t_8TeV_1000_200_100_histos.root","RECREATE");
 
   _fJetPT->Write();
+  _fGenJetPT->Write();
+  _fDeltaJetPTs->Write();
   _f1stJetPT->Write();
   _f2ndJetPT->Write();
   _fJetEta->Write();
@@ -272,9 +312,13 @@ Int_t ExampleT1t1tAnalysis::Output()
   _f1stJetMass->Write();
   _f2ndJetMass->Write();
   _fHT->Write();
+  _fScalarHT->Write();
   _fNJets->Write();
   _fTopPT->Write();
+  _fTopStopPT->Write();
+  _fTopGluinoPT->Write();
   _fStopPT->Write();
+  _fGluinoPT->Write();
   _fLSPPT->Write();
   _fDeltaR1->Write();
   _fDeltaR2->Write();
