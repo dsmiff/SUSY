@@ -467,6 +467,8 @@ public :
 private:
 
    TH1D* _fJetPT;
+   TH1D* _fGenJetPT;
+   TH1D* _fDeltaJetPTs;
    TH1D* _fNJets;
    TH1D* _f1stJetPT;
    TH1D* _f2ndJetPT;
@@ -475,8 +477,12 @@ private:
    TH1D* _fJetEta;
    TH1D* _fJetPhi;
    TH1D* _fHT;
+   TH1D* _fScalarHT;
    TH1D* _fTopPT;
+   TH1D* _fTopStopPT;
+   TH1D* _fTopGluinoPT;
    TH1D* _fStopPT;
+   TH1D* _fGluinoPT;
    TH1D* _fLSPPT;
    TH2F* _fDeltaR1;
    TH2F* _fDeltaR2;
@@ -489,6 +495,8 @@ private:
    std::vector<Float_t> jetmass;
    std::vector<Float_t> jeteta;
    std::vector<Float_t> jetphi;
+   std::vector<Int_t> ngenjets;
+   std::vector<Float_t> genjetpts;
    std::vector<Long64_t> particles;        // Vector of particle PIDs per event
    std::vector<Int_t> particlestatus;
    std::vector<Float_t> mothers;
@@ -519,9 +527,9 @@ ExampleT1t1tAnalysis::ExampleT1t1tAnalysis(TTree *tree) : fChain(0)
 // if parameter tree is not specified (or zero), connect the file
 // used to generate this class and read the Tree.
    if (tree == 0) {
-      TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("T1t1t_100_500_100_output.root");
+      TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("T1t1t_1000_200_100_output.root");
       if (!f || !f->IsOpen()) {
-         f = new TFile("T1t1t_100_500_100_output.root");
+         f = new TFile("T1t1t_1000_200_100_output.root");
       }
       f->GetObject("Delphes",tree);
 
