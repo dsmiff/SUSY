@@ -1,8 +1,9 @@
 //////////////////////////////////////////////////////////
-// This class has been automatically generated on
-// Fri Apr 11 17:39:37 2014 by ROOT version 5.34/18
-// from TTree Delphes/Analysis tree
-// found on file: T1t1t_100_500_100_output.root
+// 
+//  Analysis code for the T1t1t model
+//  Author: Dominic Smith, University of Bristol/VUB
+//  Date: June 2014
+// 
 //////////////////////////////////////////////////////////
 
 #ifndef ExampleT1t1tAnalysis_h
@@ -17,12 +18,10 @@
 #include <TRefArray.h>
 #include <TLorentzVector.h>
 #include <TRef.h>
-
-// Header file for the classes stored in the TTree if any.
 #include <TClonesArray.h>
 #include <TObject.h>
 
-// Fixed size dimensions of array or collections stored in the TTree if any.
+// Array sizes
 const Int_t kMaxEvent = 1;
 const Int_t kMaxRwgt = 1;
 const Int_t kMaxParticle = 30;
@@ -40,212 +39,211 @@ const Int_t kMaxScalarHT = 1;
 
 class ExampleT1t1tAnalysis {
 public :
-   TTree          *fChain;   //!pointer to the analyzed TTree or TChain
-   Int_t           fCurrent; //!current Tree number in a TChain
-
+  TTree          *fChain;   //!pointer to the analyzed TTree or TChain
+  Int_t           fCurrent; //!current Tree number in a TChain
 
 
    // Declaration of leaf types
-   Int_t           Event_;
-   UInt_t          Event_fUniqueID[kMaxEvent];   //[Event_]
-   UInt_t          Event_fBits[kMaxEvent];   //[Event_]
-   Long64_t        Event_Number[kMaxEvent];   //[Event_]
-   Float_t         Event_ReadTime[kMaxEvent];   //[Event_]
-   Float_t         Event_ProcTime[kMaxEvent];   //[Event_]
-   Int_t           Event_ProcessID[kMaxEvent];   //[Event_]
-   Float_t         Event_Weight[kMaxEvent];   //[Event_]
-   Float_t         Event_ScalePDF[kMaxEvent];   //[Event_]
-   Float_t         Event_AlphaQED[kMaxEvent];   //[Event_]
-   Float_t         Event_AlphaQCD[kMaxEvent];   //[Event_]
-   Int_t           Event_size;
-   Int_t           Rwgt_;
-   UInt_t          Rwgt_fUniqueID[kMaxRwgt];   //[Rwgt_]
-   UInt_t          Rwgt_fBits[kMaxRwgt];   //[Rwgt_]
-   Float_t         Rwgt_Weight[kMaxRwgt];   //[Rwgt_]
-   Int_t           Rwgt_size;
-   Int_t           Particle_;
-   UInt_t          Particle_fUniqueID[kMaxParticle];   //[Particle_]
-   UInt_t          Particle_fBits[kMaxParticle];   //[Particle_]
-   Int_t           Particle_PID[kMaxParticle];   //[Particle_]
-   Int_t           Particle_Status[kMaxParticle];   //[Particle_]
-   Int_t           Particle_IsPU[kMaxParticle];   //[Particle_]
-   Int_t           Particle_M1[kMaxParticle];   //[Particle_]
-   Int_t           Particle_M2[kMaxParticle];   //[Particle_]
-   Int_t           Particle_D1[kMaxParticle];   //[Particle_]
-   Int_t           Particle_D2[kMaxParticle];   //[Particle_]
-   Int_t           Particle_Charge[kMaxParticle];   //[Particle_]
-   Float_t         Particle_Mass[kMaxParticle];   //[Particle_]
-   Float_t         Particle_E[kMaxParticle];   //[Particle_]
-   Float_t         Particle_Px[kMaxParticle];   //[Particle_]
-   Float_t         Particle_Py[kMaxParticle];   //[Particle_]
-   Float_t         Particle_Pz[kMaxParticle];   //[Particle_]
-   Float_t         Particle_PT[kMaxParticle];   //[Particle_]
-   Float_t         Particle_Eta[kMaxParticle];   //[Particle_]
-   Float_t         Particle_Phi[kMaxParticle];   //[Particle_]
-   Float_t         Particle_Rapidity[kMaxParticle];   //[Particle_]
-   Float_t         Particle_T[kMaxParticle];   //[Particle_]
-   Float_t         Particle_X[kMaxParticle];   //[Particle_]
-   Float_t         Particle_Y[kMaxParticle];   //[Particle_]
-   Float_t         Particle_Z[kMaxParticle];   //[Particle_]
-   Int_t           Particle_size;
-   Int_t           Track_;
-   UInt_t          Track_fUniqueID[kMaxTrack];   //[Track_]
-   UInt_t          Track_fBits[kMaxTrack];   //[Track_]
-   Int_t           Track_PID[kMaxTrack];   //[Track_]
-   Int_t           Track_Charge[kMaxTrack];   //[Track_]
-   Float_t         Track_PT[kMaxTrack];   //[Track_]
-   Float_t         Track_Eta[kMaxTrack];   //[Track_]
-   Float_t         Track_Phi[kMaxTrack];   //[Track_]
-   Float_t         Track_EtaOuter[kMaxTrack];   //[Track_]
-   Float_t         Track_PhiOuter[kMaxTrack];   //[Track_]
-   Float_t         Track_X[kMaxTrack];   //[Track_]
-   Float_t         Track_Y[kMaxTrack];   //[Track_]
-   Float_t         Track_Z[kMaxTrack];   //[Track_]
-   Float_t         Track_T[kMaxTrack];   //[Track_]
-   Float_t         Track_XOuter[kMaxTrack];   //[Track_]
-   Float_t         Track_YOuter[kMaxTrack];   //[Track_]
-   Float_t         Track_ZOuter[kMaxTrack];   //[Track_]
-   Float_t         Track_TOuter[kMaxTrack];   //[Track_]
-   TRef            Track_Particle[kMaxTrack];
-   Int_t           Track_size;
-   Int_t           Tower_;
-   UInt_t          Tower_fUniqueID[kMaxTower];   //[Tower_]
-   UInt_t          Tower_fBits[kMaxTower];   //[Tower_]
-   Float_t         Tower_ET[kMaxTower];   //[Tower_]
-   Float_t         Tower_Eta[kMaxTower];   //[Tower_]
-   Float_t         Tower_Phi[kMaxTower];   //[Tower_]
-   Float_t         Tower_E[kMaxTower];   //[Tower_]
-   Float_t         Tower_T[kMaxTower];   //[Tower_]
-   Float_t         Tower_Eem[kMaxTower];   //[Tower_]
-   Float_t         Tower_Ehad[kMaxTower];   //[Tower_]
-   Float_t         Tower_Edges[kMaxTower][4];   //[Tower_]
-   TRefArray       Tower_Particles[kMaxTower];
-   Int_t           Tower_size;
-   Int_t           EFlowTrack_;
-   UInt_t          EFlowTrack_fUniqueID[kMaxEFlowTrack];   //[EFlowTrack_]
-   UInt_t          EFlowTrack_fBits[kMaxEFlowTrack];   //[EFlowTrack_]
-   Int_t           EFlowTrack_PID[kMaxEFlowTrack];   //[EFlowTrack_]
-   Int_t           EFlowTrack_Charge[kMaxEFlowTrack];   //[EFlowTrack_]
-   Float_t         EFlowTrack_PT[kMaxEFlowTrack];   //[EFlowTrack_]
-   Float_t         EFlowTrack_Eta[kMaxEFlowTrack];   //[EFlowTrack_]
-   Float_t         EFlowTrack_Phi[kMaxEFlowTrack];   //[EFlowTrack_]
-   Float_t         EFlowTrack_EtaOuter[kMaxEFlowTrack];   //[EFlowTrack_]
-   Float_t         EFlowTrack_PhiOuter[kMaxEFlowTrack];   //[EFlowTrack_]
-   Float_t         EFlowTrack_X[kMaxEFlowTrack];   //[EFlowTrack_]
-   Float_t         EFlowTrack_Y[kMaxEFlowTrack];   //[EFlowTrack_]
-   Float_t         EFlowTrack_Z[kMaxEFlowTrack];   //[EFlowTrack_]
-   Float_t         EFlowTrack_T[kMaxEFlowTrack];   //[EFlowTrack_]
-   Float_t         EFlowTrack_XOuter[kMaxEFlowTrack];   //[EFlowTrack_]
-   Float_t         EFlowTrack_YOuter[kMaxEFlowTrack];   //[EFlowTrack_]
-   Float_t         EFlowTrack_ZOuter[kMaxEFlowTrack];   //[EFlowTrack_]
-   Float_t         EFlowTrack_TOuter[kMaxEFlowTrack];   //[EFlowTrack_]
-   TRef            EFlowTrack_Particle[kMaxEFlowTrack];
-   Int_t           EFlowTrack_size;
-   Int_t           EFlowTower_;
-   UInt_t          EFlowTower_fUniqueID[kMaxEFlowTower];   //[EFlowTower_]
-   UInt_t          EFlowTower_fBits[kMaxEFlowTower];   //[EFlowTower_]
-   Float_t         EFlowTower_ET[kMaxEFlowTower];   //[EFlowTower_]
-   Float_t         EFlowTower_Eta[kMaxEFlowTower];   //[EFlowTower_]
-   Float_t         EFlowTower_Phi[kMaxEFlowTower];   //[EFlowTower_]
-   Float_t         EFlowTower_E[kMaxEFlowTower];   //[EFlowTower_]
-   Float_t         EFlowTower_T[kMaxEFlowTower];   //[EFlowTower_]
-   Float_t         EFlowTower_Eem[kMaxEFlowTower];   //[EFlowTower_]
-   Float_t         EFlowTower_Ehad[kMaxEFlowTower];   //[EFlowTower_]
-   Float_t         EFlowTower_Edges[kMaxEFlowTower][4];   //[EFlowTower_]
-   TRefArray       EFlowTower_Particles[kMaxEFlowTower];
-   Int_t           EFlowTower_size;
-   Int_t           GenJet_;
-   UInt_t          GenJet_fUniqueID[kMaxGenJet];   //[GenJet_]
-   UInt_t          GenJet_fBits[kMaxGenJet];   //[GenJet_]
-   Float_t         GenJet_PT[kMaxGenJet];   //[GenJet_]
-   Float_t         GenJet_Eta[kMaxGenJet];   //[GenJet_]
-   Float_t         GenJet_Phi[kMaxGenJet];   //[GenJet_]
-   Float_t         GenJet_T[kMaxGenJet];   //[GenJet_]
-   Float_t         GenJet_Mass[kMaxGenJet];   //[GenJet_]
-   Float_t         GenJet_DeltaEta[kMaxGenJet];   //[GenJet_]
-   Float_t         GenJet_DeltaPhi[kMaxGenJet];   //[GenJet_]
-   UInt_t          GenJet_BTag[kMaxGenJet];   //[GenJet_]
-   UInt_t          GenJet_TauTag[kMaxGenJet];   //[GenJet_]
-   Int_t           GenJet_Charge[kMaxGenJet];   //[GenJet_]
-   Float_t         GenJet_EhadOverEem[kMaxGenJet];   //[GenJet_]
-   TRefArray       GenJet_Constituents[kMaxGenJet];
-   TRefArray       GenJet_Particles[kMaxGenJet];
-   Int_t           GenJet_NCharged[kMaxGenJet];   //[GenJet_]
-   Int_t           GenJet_NNeutrals[kMaxGenJet];   //[GenJet_]
-   Float_t         GenJet_Beta[kMaxGenJet];   //[GenJet_]
-   Float_t         GenJet_BetaStar[kMaxGenJet];   //[GenJet_]
-   Float_t         GenJet_MeanSqDeltaR[kMaxGenJet];   //[GenJet_]
-   Float_t         GenJet_PTD[kMaxGenJet];   //[GenJet_]
-   Float_t         GenJet_FracPt[kMaxGenJet][5];   //[GenJet_]
-   Int_t           GenJet_size;
-   Int_t           Jet_;
-   UInt_t          Jet_fUniqueID[kMaxJet];   //[Jet_]
-   UInt_t          Jet_fBits[kMaxJet];   //[Jet_]
-   Float_t         Jet_PT[kMaxJet];   //[Jet_]
-   Float_t         Jet_Eta[kMaxJet];   //[Jet_]
-   Float_t         Jet_Phi[kMaxJet];   //[Jet_]
-   Float_t         Jet_T[kMaxJet];   //[Jet_]
-   Float_t         Jet_Mass[kMaxJet];   //[Jet_]
-   Float_t         Jet_DeltaEta[kMaxJet];   //[Jet_]
-   Float_t         Jet_DeltaPhi[kMaxJet];   //[Jet_]
-   UInt_t          Jet_BTag[kMaxJet];   //[Jet_]
-   UInt_t          Jet_TauTag[kMaxJet];   //[Jet_]
-   Int_t           Jet_Charge[kMaxJet];   //[Jet_]
-   Float_t         Jet_EhadOverEem[kMaxJet];   //[Jet_]
-   TRefArray       Jet_Constituents[kMaxJet];
-   TRefArray       Jet_Particles[kMaxJet];
-   Int_t           Jet_NCharged[kMaxJet];   //[Jet_]
-   Int_t           Jet_NNeutrals[kMaxJet];   //[Jet_]
-   Float_t         Jet_Beta[kMaxJet];   //[Jet_]
-   Float_t         Jet_BetaStar[kMaxJet];   //[Jet_]
-   Float_t         Jet_MeanSqDeltaR[kMaxJet];   //[Jet_]
-   Float_t         Jet_PTD[kMaxJet];   //[Jet_]
-   Float_t         Jet_FracPt[kMaxJet][5];   //[Jet_]
-   Int_t           Jet_size;
-   Int_t           Electron_;
-   UInt_t          Electron_fUniqueID[kMaxElectron];   //[Electron_]
-   UInt_t          Electron_fBits[kMaxElectron];   //[Electron_]
-   Float_t         Electron_PT[kMaxElectron];   //[Electron_]
-   Float_t         Electron_Eta[kMaxElectron];   //[Electron_]
-   Float_t         Electron_Phi[kMaxElectron];   //[Electron_]
-   Float_t         Electron_T[kMaxElectron];   //[Electron_]
-   Int_t           Electron_Charge[kMaxElectron];   //[Electron_]
-   Float_t         Electron_EhadOverEem[kMaxElectron];   //[Electron_]
-   TRef            Electron_Particle[kMaxElectron];
-   Int_t           Electron_size;
-   Int_t           Photon_;
-   UInt_t          Photon_fUniqueID[kMaxPhoton];   //[Photon_]
-   UInt_t          Photon_fBits[kMaxPhoton];   //[Photon_]
-   Float_t         Photon_PT[kMaxPhoton];   //[Photon_]
-   Float_t         Photon_Eta[kMaxPhoton];   //[Photon_]
-   Float_t         Photon_Phi[kMaxPhoton];   //[Photon_]
-   Float_t         Photon_E[kMaxPhoton];   //[Photon_]
-   Float_t         Photon_T[kMaxPhoton];   //[Photon_]
-   Float_t         Photon_EhadOverEem[kMaxPhoton];   //[Photon_]
-   TRefArray       Photon_Particles[kMaxPhoton];
-   Int_t           Photon_size;
-   Int_t           Muon_;
-   UInt_t          Muon_fUniqueID[kMaxMuon];   //[Muon_]
-   UInt_t          Muon_fBits[kMaxMuon];   //[Muon_]
-   Float_t         Muon_PT[kMaxMuon];   //[Muon_]
-   Float_t         Muon_Eta[kMaxMuon];   //[Muon_]
-   Float_t         Muon_Phi[kMaxMuon];   //[Muon_]
-   Float_t         Muon_T[kMaxMuon];   //[Muon_]
-   Int_t           Muon_Charge[kMaxMuon];   //[Muon_]
-   TRef            Muon_Particle[kMaxMuon];
-   Int_t           Muon_size;
-   Int_t           MissingET_;
-   UInt_t          MissingET_fUniqueID[kMaxMissingET];   //[MissingET_]
-   UInt_t          MissingET_fBits[kMaxMissingET];   //[MissingET_]
-   Float_t         MissingET_MET[kMaxMissingET];   //[MissingET_]
-   Float_t         MissingET_Eta[kMaxMissingET];   //[MissingET_]
-   Float_t         MissingET_Phi[kMaxMissingET];   //[MissingET_]
-   Int_t           MissingET_size;
-   Int_t           ScalarHT_;
-   UInt_t          ScalarHT_fUniqueID[kMaxScalarHT];   //[ScalarHT_]
-   UInt_t          ScalarHT_fBits[kMaxScalarHT];   //[ScalarHT_]
-   Float_t         ScalarHT_HT[kMaxScalarHT];   //[ScalarHT_]
-   Int_t           ScalarHT_size;
+  Int_t           Event_;
+  UInt_t          Event_fUniqueID[kMaxEvent];   //[Event_]
+  UInt_t          Event_fBits[kMaxEvent];   //[Event_]
+  Long64_t        Event_Number[kMaxEvent];   //[Event_]
+  Float_t         Event_ReadTime[kMaxEvent];   //[Event_]
+  Float_t         Event_ProcTime[kMaxEvent];   //[Event_]
+  Int_t           Event_ProcessID[kMaxEvent];   //[Event_]
+  Float_t         Event_Weight[kMaxEvent];   //[Event_]
+  Float_t         Event_ScalePDF[kMaxEvent];   //[Event_]
+  Float_t         Event_AlphaQED[kMaxEvent];   //[Event_]
+  Float_t         Event_AlphaQCD[kMaxEvent];   //[Event_]
+  Int_t           Event_size;
+  Int_t           Rwgt_;
+  UInt_t          Rwgt_fUniqueID[kMaxRwgt];   //[Rwgt_]
+  UInt_t          Rwgt_fBits[kMaxRwgt];   //[Rwgt_]
+  Float_t         Rwgt_Weight[kMaxRwgt];   //[Rwgt_]
+  Int_t           Rwgt_size;
+  Int_t           Particle_;
+  UInt_t          Particle_fUniqueID[kMaxParticle];   //[Particle_]
+  UInt_t          Particle_fBits[kMaxParticle];   //[Particle_]
+  Int_t           Particle_PID[kMaxParticle];   //[Particle_]
+  Int_t           Particle_Status[kMaxParticle];   //[Particle_]
+  Int_t           Particle_IsPU[kMaxParticle];   //[Particle_]
+  Int_t           Particle_M1[kMaxParticle];   //[Particle_]
+  Int_t           Particle_M2[kMaxParticle];   //[Particle_]
+  Int_t           Particle_D1[kMaxParticle];   //[Particle_]
+  Int_t           Particle_D2[kMaxParticle];   //[Particle_]
+  Int_t           Particle_Charge[kMaxParticle];   //[Particle_]
+  Float_t         Particle_Mass[kMaxParticle];   //[Particle_]
+  Float_t         Particle_E[kMaxParticle];   //[Particle_]
+  Float_t         Particle_Px[kMaxParticle];   //[Particle_]
+  Float_t         Particle_Py[kMaxParticle];   //[Particle_]
+  Float_t         Particle_Pz[kMaxParticle];   //[Particle_]
+  Float_t         Particle_PT[kMaxParticle];   //[Particle_]
+  Float_t         Particle_Eta[kMaxParticle];   //[Particle_]
+  Float_t         Particle_Phi[kMaxParticle];   //[Particle_]
+  Float_t         Particle_Rapidity[kMaxParticle];   //[Particle_]
+  Float_t         Particle_T[kMaxParticle];   //[Particle_]
+  Float_t         Particle_X[kMaxParticle];   //[Particle_]
+  Float_t         Particle_Y[kMaxParticle];   //[Particle_]
+  Float_t         Particle_Z[kMaxParticle];   //[Particle_]
+  Int_t           Particle_size;
+  Int_t           Track_;
+  UInt_t          Track_fUniqueID[kMaxTrack];   //[Track_]
+  UInt_t          Track_fBits[kMaxTrack];   //[Track_]
+  Int_t           Track_PID[kMaxTrack];   //[Track_]
+  Int_t           Track_Charge[kMaxTrack];   //[Track_]
+  Float_t         Track_PT[kMaxTrack];   //[Track_]
+  Float_t         Track_Eta[kMaxTrack];   //[Track_]
+  Float_t         Track_Phi[kMaxTrack];   //[Track_]
+  Float_t         Track_EtaOuter[kMaxTrack];   //[Track_]
+  Float_t         Track_PhiOuter[kMaxTrack];   //[Track_]
+  Float_t         Track_X[kMaxTrack];   //[Track_]
+  Float_t         Track_Y[kMaxTrack];   //[Track_]
+  Float_t         Track_Z[kMaxTrack];   //[Track_]
+  Float_t         Track_T[kMaxTrack];   //[Track_]
+  Float_t         Track_XOuter[kMaxTrack];   //[Track_]
+  Float_t         Track_YOuter[kMaxTrack];   //[Track_]
+  Float_t         Track_ZOuter[kMaxTrack];   //[Track_]
+  Float_t         Track_TOuter[kMaxTrack];   //[Track_]
+  TRef            Track_Particle[kMaxTrack];
+  Int_t           Track_size;
+  Int_t           Tower_;
+  UInt_t          Tower_fUniqueID[kMaxTower];   //[Tower_]
+  UInt_t          Tower_fBits[kMaxTower];   //[Tower_]
+  Float_t         Tower_ET[kMaxTower];   //[Tower_]
+  Float_t         Tower_Eta[kMaxTower];   //[Tower_]
+  Float_t         Tower_Phi[kMaxTower];   //[Tower_]
+  Float_t         Tower_E[kMaxTower];   //[Tower_]
+  Float_t         Tower_T[kMaxTower];   //[Tower_]
+  Float_t         Tower_Eem[kMaxTower];   //[Tower_]
+  Float_t         Tower_Ehad[kMaxTower];   //[Tower_]
+  Float_t         Tower_Edges[kMaxTower][4];   //[Tower_]
+  TRefArray       Tower_Particles[kMaxTower];
+  Int_t           Tower_size;
+  Int_t           EFlowTrack_;
+  UInt_t          EFlowTrack_fUniqueID[kMaxEFlowTrack];   //[EFlowTrack_]
+  UInt_t          EFlowTrack_fBits[kMaxEFlowTrack];   //[EFlowTrack_]
+  Int_t           EFlowTrack_PID[kMaxEFlowTrack];   //[EFlowTrack_]
+  Int_t           EFlowTrack_Charge[kMaxEFlowTrack];   //[EFlowTrack_]
+  Float_t         EFlowTrack_PT[kMaxEFlowTrack];   //[EFlowTrack_]
+  Float_t         EFlowTrack_Eta[kMaxEFlowTrack];   //[EFlowTrack_]
+  Float_t         EFlowTrack_Phi[kMaxEFlowTrack];   //[EFlowTrack_]
+  Float_t         EFlowTrack_EtaOuter[kMaxEFlowTrack];   //[EFlowTrack_]
+  Float_t         EFlowTrack_PhiOuter[kMaxEFlowTrack];   //[EFlowTrack_]
+  Float_t         EFlowTrack_X[kMaxEFlowTrack];   //[EFlowTrack_]
+  Float_t         EFlowTrack_Y[kMaxEFlowTrack];   //[EFlowTrack_]
+  Float_t         EFlowTrack_Z[kMaxEFlowTrack];   //[EFlowTrack_]
+  Float_t         EFlowTrack_T[kMaxEFlowTrack];   //[EFlowTrack_]
+  Float_t         EFlowTrack_XOuter[kMaxEFlowTrack];   //[EFlowTrack_]
+  Float_t         EFlowTrack_YOuter[kMaxEFlowTrack];   //[EFlowTrack_]
+  Float_t         EFlowTrack_ZOuter[kMaxEFlowTrack];   //[EFlowTrack_]
+  Float_t         EFlowTrack_TOuter[kMaxEFlowTrack];   //[EFlowTrack_]
+  TRef            EFlowTrack_Particle[kMaxEFlowTrack];
+  Int_t           EFlowTrack_size;
+  Int_t           EFlowTower_;
+  UInt_t          EFlowTower_fUniqueID[kMaxEFlowTower];   //[EFlowTower_]
+  UInt_t          EFlowTower_fBits[kMaxEFlowTower];   //[EFlowTower_]
+  Float_t         EFlowTower_ET[kMaxEFlowTower];   //[EFlowTower_]
+  Float_t         EFlowTower_Eta[kMaxEFlowTower];   //[EFlowTower_]
+  Float_t         EFlowTower_Phi[kMaxEFlowTower];   //[EFlowTower_]
+  Float_t         EFlowTower_E[kMaxEFlowTower];   //[EFlowTower_]
+  Float_t         EFlowTower_T[kMaxEFlowTower];   //[EFlowTower_]
+  Float_t         EFlowTower_Eem[kMaxEFlowTower];   //[EFlowTower_]
+  Float_t         EFlowTower_Ehad[kMaxEFlowTower];   //[EFlowTower_]
+  Float_t         EFlowTower_Edges[kMaxEFlowTower][4];   //[EFlowTower_]
+  TRefArray       EFlowTower_Particles[kMaxEFlowTower];
+  Int_t           EFlowTower_size;
+  Int_t           GenJet_;
+  UInt_t          GenJet_fUniqueID[kMaxGenJet];   //[GenJet_]
+  UInt_t          GenJet_fBits[kMaxGenJet];   //[GenJet_]
+  Float_t         GenJet_PT[kMaxGenJet];   //[GenJet_]
+  Float_t         GenJet_Eta[kMaxGenJet];   //[GenJet_]
+  Float_t         GenJet_Phi[kMaxGenJet];   //[GenJet_]
+  Float_t         GenJet_T[kMaxGenJet];   //[GenJet_]
+  Float_t         GenJet_Mass[kMaxGenJet];   //[GenJet_]
+  Float_t         GenJet_DeltaEta[kMaxGenJet];   //[GenJet_]
+  Float_t         GenJet_DeltaPhi[kMaxGenJet];   //[GenJet_]
+  UInt_t          GenJet_BTag[kMaxGenJet];   //[GenJet_]
+  UInt_t          GenJet_TauTag[kMaxGenJet];   //[GenJet_]
+  Int_t           GenJet_Charge[kMaxGenJet];   //[GenJet_]
+  Float_t         GenJet_EhadOverEem[kMaxGenJet];   //[GenJet_]
+  TRefArray       GenJet_Constituents[kMaxGenJet];
+  TRefArray       GenJet_Particles[kMaxGenJet];
+  Int_t           GenJet_NCharged[kMaxGenJet];   //[GenJet_]
+  Int_t           GenJet_NNeutrals[kMaxGenJet];   //[GenJet_]
+  Float_t         GenJet_Beta[kMaxGenJet];   //[GenJet_]
+  Float_t         GenJet_BetaStar[kMaxGenJet];   //[GenJet_]
+  Float_t         GenJet_MeanSqDeltaR[kMaxGenJet];   //[GenJet_]
+  Float_t         GenJet_PTD[kMaxGenJet];   //[GenJet_]
+  Float_t         GenJet_FracPt[kMaxGenJet][5];   //[GenJet_]
+  Int_t           GenJet_size;
+  Int_t           Jet_;
+  UInt_t          Jet_fUniqueID[kMaxJet];   //[Jet_]
+  UInt_t          Jet_fBits[kMaxJet];   //[Jet_]
+  Float_t         Jet_PT[kMaxJet];   //[Jet_]
+  Float_t         Jet_Eta[kMaxJet];   //[Jet_]
+  Float_t         Jet_Phi[kMaxJet];   //[Jet_]
+  Float_t         Jet_T[kMaxJet];   //[Jet_]
+  Float_t         Jet_Mass[kMaxJet];   //[Jet_]
+  Float_t         Jet_DeltaEta[kMaxJet];   //[Jet_]
+  Float_t         Jet_DeltaPhi[kMaxJet];   //[Jet_]
+  UInt_t          Jet_BTag[kMaxJet];   //[Jet_]
+  UInt_t          Jet_TauTag[kMaxJet];   //[Jet_]
+  Int_t           Jet_Charge[kMaxJet];   //[Jet_]
+  Float_t         Jet_EhadOverEem[kMaxJet];   //[Jet_]
+  TRefArray       Jet_Constituents[kMaxJet];
+  TRefArray       Jet_Particles[kMaxJet];
+  Int_t           Jet_NCharged[kMaxJet];   //[Jet_]
+  Int_t           Jet_NNeutrals[kMaxJet];   //[Jet_]
+  Float_t         Jet_Beta[kMaxJet];   //[Jet_]
+  Float_t         Jet_BetaStar[kMaxJet];   //[Jet_]
+  Float_t         Jet_MeanSqDeltaR[kMaxJet];   //[Jet_]
+  Float_t         Jet_PTD[kMaxJet];   //[Jet_]
+  Float_t         Jet_FracPt[kMaxJet][5];   //[Jet_]
+  Int_t           Jet_size;
+  Int_t           Electron_;
+  UInt_t          Electron_fUniqueID[kMaxElectron];   //[Electron_]
+  UInt_t          Electron_fBits[kMaxElectron];   //[Electron_]
+  Float_t         Electron_PT[kMaxElectron];   //[Electron_]
+  Float_t         Electron_Eta[kMaxElectron];   //[Electron_]
+  Float_t         Electron_Phi[kMaxElectron];   //[Electron_]
+  Float_t         Electron_T[kMaxElectron];   //[Electron_]
+  Int_t           Electron_Charge[kMaxElectron];   //[Electron_]
+  Float_t         Electron_EhadOverEem[kMaxElectron];   //[Electron_]
+  TRef            Electron_Particle[kMaxElectron];
+  Int_t           Electron_size;
+  Int_t           Photon_;
+  UInt_t          Photon_fUniqueID[kMaxPhoton];   //[Photon_]
+  UInt_t          Photon_fBits[kMaxPhoton];   //[Photon_]
+  Float_t         Photon_PT[kMaxPhoton];   //[Photon_]
+  Float_t         Photon_Eta[kMaxPhoton];   //[Photon_]
+  Float_t         Photon_Phi[kMaxPhoton];   //[Photon_]
+  Float_t         Photon_E[kMaxPhoton];   //[Photon_]
+  Float_t         Photon_T[kMaxPhoton];   //[Photon_]
+  Float_t         Photon_EhadOverEem[kMaxPhoton];   //[Photon_]
+  TRefArray       Photon_Particles[kMaxPhoton];
+  Int_t           Photon_size;
+  Int_t           Muon_;
+  UInt_t          Muon_fUniqueID[kMaxMuon];   //[Muon_]
+  UInt_t          Muon_fBits[kMaxMuon];   //[Muon_]
+  Float_t         Muon_PT[kMaxMuon];   //[Muon_]
+  Float_t         Muon_Eta[kMaxMuon];   //[Muon_]
+  Float_t         Muon_Phi[kMaxMuon];   //[Muon_]
+  Float_t         Muon_T[kMaxMuon];   //[Muon_]
+  Int_t           Muon_Charge[kMaxMuon];   //[Muon_]
+  TRef            Muon_Particle[kMaxMuon];
+  Int_t           Muon_size;
+  Int_t           MissingET_;
+  UInt_t          MissingET_fUniqueID[kMaxMissingET];   //[MissingET_]
+  UInt_t          MissingET_fBits[kMaxMissingET];   //[MissingET_]
+  Float_t         MissingET_MET[kMaxMissingET];   //[MissingET_]
+  Float_t         MissingET_Eta[kMaxMissingET];   //[MissingET_]
+  Float_t         MissingET_Phi[kMaxMissingET];   //[MissingET_]
+  Int_t           MissingET_size;
+  Int_t           ScalarHT_;
+  UInt_t          ScalarHT_fUniqueID[kMaxScalarHT];   //[ScalarHT_]
+  UInt_t          ScalarHT_fBits[kMaxScalarHT];   //[ScalarHT_]
+  Float_t         ScalarHT_HT[kMaxScalarHT];   //[ScalarHT_]
+  Int_t           ScalarHT_size;
 
    // List of branches
    TBranch        *b_Event_;   //!
@@ -477,6 +475,7 @@ private:
    TH1D* _fJetEta;
    TH1D* _fJetPhi;
    TH1D* _fHT;
+   TH1D* _fMET;
    TH1D* _fScalarHT;
    TH1D* _fTopPT;
    TH1D* _fTopStopPT;
@@ -488,8 +487,9 @@ private:
    TH2F* _fDeltaR2;
    TH2F* _fDeltaR3;
    TH2F* _fDeltaR4;
-   
+   TH2F* _fNmerged;
 
+   
    std::vector<Int_t> njets;
    std::vector<Float_t> jetpts;            // Vector of jet PTs per event
    std::vector<Float_t> jetmass;
@@ -506,6 +506,7 @@ private:
    std::vector<TLorentzVector> tops;
    std::vector<TLorentzVector> bottoms;
    std::vector<TLorentzVector> wbosons;
+   std::vector<Float_t> DeltaRs;
 
    TLorentzVector Top;                     // Assigning TLorentzVectors to our particles
    TLorentzVector Stop;
@@ -516,25 +517,23 @@ private:
 
 
 
-
 };
 
 #endif
 
 #ifdef ExampleT1t1tAnalysis_cxx
-ExampleT1t1tAnalysis::ExampleT1t1tAnalysis(TTree *tree) : fChain(0) 
+ExampleT1t1tAnalysis::ExampleT1t1tAnalysis(TTree *tree) : fChain(0)     // THIS IS MY CONSTRUCTOR
 {
-// if parameter tree is not specified (or zero), connect the file
+// if parameter tree is not specified (NEVER IS)(or zero), connect the file
 // used to generate this class and read the Tree.
    if (tree == 0) {
-      TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("T1t1t_1000_200_100_output.root");
+      TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("T1t1t_100_500_100_output.root");
       if (!f || !f->IsOpen()) {
-         f = new TFile("T1t1t_1000_200_100_output.root");
+         f = new TFile("T1t1t_100_500_100_output.root");
       }
       f->GetObject("Delphes",tree);
-
-   }
-   Init(tree);
+  }
+   Init(tree);      // Calls function Init
 }
 
 ExampleT1t1tAnalysis::~ExampleT1t1tAnalysis()
@@ -546,6 +545,7 @@ ExampleT1t1tAnalysis::~ExampleT1t1tAnalysis()
 Int_t ExampleT1t1tAnalysis::GetEntry(Long64_t entry)
 {
 // Read contents of entry.
+
    if (!fChain) return 0;
    return fChain->GetEntry(entry);
 }
